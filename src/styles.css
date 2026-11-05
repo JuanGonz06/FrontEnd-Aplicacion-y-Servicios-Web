@@ -1,1 +1,45 @@
 /* You can add global styles to this file, and also import other style files */
+/* ==========================================
+   MODO OSCURO GLOBAL (Afecta a todo el sistema)
+   ========================================== */
+body.dark-mode {
+  background-color: #121212 !important;
+  color: #e0e0e0 !important;
+}
+
+body.dark-mode .contenido {
+  background-color: #121212 !important;
+}
+
+body.dark-mode h2, 
+body.dark-mode h3 {
+  color: #ffffff !important;
+}
+
+body.dark-mode .card,
+body.dark-mode .tabla-wrap,
+body.dark-mode .modal-content {
+  background-color: #1e1e1e !important;
+  color: #e0e0e0 !important;
+  border: 1px solid #2d2d2d;
+}
+
+body.dark-mode .form-control {
+  background-color: #2d2d2d !important;
+  color: #ffffff !important;
+  border: 1px solid #444 !important;
+}
+
+body.dark-mode .tabla th {
+  background-color: #252525 !important;
+  color: #ffffff !important;
+}
+
+body.dark-mode .tabla td {
+  color: #cccccc !important;
+  border-bottom: 1px solid #2d2d2d !important;
+}
+
+body.dark-mode .tabla tr:hover {
+  background-color: #2a2a2a !important;
+}
