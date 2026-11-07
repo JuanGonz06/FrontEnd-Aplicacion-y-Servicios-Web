@@ -1,0 +1,95 @@
+:host {
+  display: block;
+}
+
+.layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f4f6f8;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.sidebar {
+  width: 260px;
+  background-color: #1e1b4b;
+  color: white;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* <-- Clave: empuja el menú arriba y el footer abajo */
+  position: fixed;
+  height: 100vh;
+  box-sizing: border-box; /* <-- Importante para que el padding no rompa la altura */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar h2 {
+  font-family: 'Poppins', system-ui, sans-serif;
+  font-size: 1.4rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: #e2e8f0;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar nav a {
+  padding: 12px 16px;
+  color: #94a3b8;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+.sidebar nav a:hover {
+  background-color: #312e81;
+  color: white;
+}
+
+/* Clase que se activa automáticamente con routerLinkActive exigida por el profesor */
+.sidebar nav a.activo {
+  background-color: #4f46e5;
+  color: white;
+  font-weight: 600;
+}
+
+/* Contenedor inferior del sidebar para el botón de modo oscuro */
+.sidebar-footer {
+  display: flex;
+  justify-content: flex-start; /* Lo alinea hacia un lado (izquierda) */
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1); /* Una línea sutil de separación */
+}
+
+/* Botón compacto de modo oscuro con icono */
+.btn-modo-oscuro {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #312e81;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.btn-modo-oscuro:hover {
+  background-color: #4f46e5;
+  transform: scale(1.05);
+}
+
+.contenido {
+  margin-left: 260px; /* Deja el espacio exacto del ancho del sidebar */
+  flex: 1;
+  padding: 32px;
+  box-sizing: border-box;
+}

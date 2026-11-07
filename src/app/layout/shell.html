@@ -1,0 +1,25 @@
+<div class="layout">
+  <!-- Sidebar lateral -->
+  <aside class="sidebar">
+    <div>
+      <h2>Aplicaciones y servicios web Equipo2</h2>
+      <nav>
+        @for (item of menu; track item.ruta) {
+          <a [routerLink]="item.ruta" routerLinkActive="activo">{{ item.etiqueta }}</a>
+        }
+      </nav>
+    </div>
+
+    <!-- Botón compacto de Modo Oscuro con solo icono al lateral inferior -->
+    <div class="sidebar-footer">
+      <button class="btn-modo-oscuro" (click)="toggleModoOscuro()" [title]="modoOscuro ? 'Cambiar a Modo Claro' : 'Cambiar a Modo Oscuro'">
+        {{ modoOscuro ? '☀️' : '🌙' }}
+      </button>
+    </div>
+  </aside>
+
+  <!-- Contenido principal -->
+  <main class="contenido">
+    <router-outlet />
+  </main>
+</div>
