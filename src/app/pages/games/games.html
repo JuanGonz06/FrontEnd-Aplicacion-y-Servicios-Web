@@ -1,0 +1,127 @@
+<div class="container">
+  <h2>Gestión de Juegos</h2>
+
+  @if (!conexionActiva) {
+    <div class="alerta error">
+      ⚠️ No hubo conexión con la API. Asegúrate de que el backend esté encendido. No se muestran datos inventados.
+    </div>
+  }
+
+  @if (mensajeError) {
+    <div class="alerta warning">{{ mensajeError }}</div>
+  }
+
+  <div class="acciones-superiores" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <div class="card filtro-card" style="margin-bottom: 0; flex: 1; margin-right: 15px;">
+      <h3>Consultar por ID</h3>
+      <div class="form-group-inline">
+        <input type="number" [(ngModel)]="idBusqueda" placeholder="Ingrese ID" class="form-control" />
+        <button class="btn-primario" (click)="buscarPorId()">Buscar</button>
+        <button class="btn-secundario" (click)="idBusqueda = null; cargarGames(); gameFiltrado = null">Limpiar</button>
+      </div>
+    </div>
+
+    <div>
+      <button class="btn-primario" (click)="abrirModalCrear()" style="padding: 12px 20px; font-size: 16px;">
+        ➕ Nuevo Juego
+      </button>
+    </div>
+  </div>
+
+  @if (mostrarModal) {
+    <div class="modal-overlay abierto" (click)="cerrarModal()">
+      <div class="modal-content card form-card" (click)="$event.stopPropagation()">
+        <h3>{{ modoEdicion ? 'Editar Juego' : 'Crear Nuevo Juego' }}</h3>
+        <form (ngSubmit)="guardarGame()">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Título:</label>
+              <input type="text" [(ngModel)]="gameSeleccionado.titulo" name="titulo" required class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>Género:</label>
+              <input type="text" [(ngModel)]="gameSeleccionado.genero" name="genero" required class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>Desarrollador:</label>
+              <input type="text" [(ngModel)]="gameSeleccionado.desarrollador" name="desarrollador" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>Precio:</label>
+              <input type="number" [(ngModel)]="gameSeleccionado.precio" name="precio" required class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>Stock:</label>
+              <input type="number" [(ngModel)]="gameSeleccionado.stock" name="stock" required class="form-control" />
+            </div>
+            <div class="form-group checkbox-group">
+              <label>
+                <input type="checkbox" [(ngModel)]="gameSeleccionado.disponible" name="disponible" />
+                Disponible
+              </label>
+            </div>
+          </div>
+          <div class="form-actions" style="margin-top: 20px;">
+            <button type="submit" class="btn-primario">{{ modoEdicion ? 'Actualizar' : 'Crear' }}</button>
+            <button type="button" class="btn-secundario" (click)="cerrarModal()">Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  }
+
+  <div class="tabla-wrap">
+    <h3>Lista de Juegos</h3>
+    <table class="tabla">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Título</th>
+          <th>Género</th>
+          <th>Desarrollador</th>
+          <th>Precio</th>
+          <th>Stock</th>
+          <th>Disponible</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @if (gameFiltrado) {
+          <tr>
+            <td>{{ gameFiltrado.id }}</td>
+            <td>{{ gameFiltrado.titulo }}</td>
+            <td>{{ gameFiltrado.genero }}</td>
+            <td>{{ gameFiltrado.desarrollador }}</td>
+            <td>{{ gameFiltrado.precio | currency }}</td>
+            <td>{{ gameFiltrado.stock }}</td>
+            <td>{{ gameFiltrado.disponible ? 'Sí' : 'No' }}</td>
+            <td>
+             <button class="btn-editar" (click)="editar(gameFiltrado)">Editar</button>
+             <button class="btn-eliminar" (click)="eliminar(gameFiltrado?.id)">Eliminar</button>
+            </td>
+          </tr>
+        } @else {
+          @for (juego of games; track juego.id) {
+            <tr>
+              <td>{{ juego.id }}</td>
+              <td>{{ juego.titulo }}</td>
+              <td>{{ juego.genero }}</td>
+              <td>{{ juego.desarrollador }}</td>
+              <td>{{ juego.precio | currency }}</td>
+              <td>{{ juego.stock }}</td>
+              <td>{{ juego.disponible ? 'Sí' : 'No' }}</td>
+              <td>
+                <button class="btn-editar" (click)="editar(juego)">Editar</button>
+                <button class="btn-eliminar" (click)="eliminar(juego?.id)">Eliminar</button>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="8" class="text-center">No hay juegos registrados o sin conexión con la API.</td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
