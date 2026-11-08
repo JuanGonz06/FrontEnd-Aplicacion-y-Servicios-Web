@@ -2,12 +2,7 @@
 ## Evidencia Frontend
 
 - **Michael Alexander Herrera Arango:** [Ver Video de Demostración Frontend](https://drive.google.com/file/d/10d-kKcsIvY7Vm-HvOs42aV9nrNwZUdbe/view?usp=sharing)
-
-
-
-
-
-
+- **Alejandro Ramos Martinez:** [Ver Video de Demostración Frontend](https://drive.google.com/file/d/1FWBkW1lmxZd5WF8d0s5gCqpGyeMiTi1D/view?usp=sharing)
 
 
 
