@@ -1,6 +1,9 @@
 import { Routes } from '@angular/router';
 import { Shell } from './layout/shell';
 import { Product } from './pages/producto/producto';
+import { Mascotas } from './pages/mascota/mascota';
+import { Games } from './pages/games/games';
+
 
 export const routes: Routes = [
   {
@@ -8,6 +11,8 @@ export const routes: Routes = [
     component: Shell,
     children: [
       { path: 'productos', component: Product },
+      { path: 'mascotas', component: Mascotas },
+      { path: 'games', component: Games },
       { path: '', redirectTo: 'productos', pathMatch: 'full' }
     ]
   },

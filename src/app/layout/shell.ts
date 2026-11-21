@@ -15,7 +15,8 @@ export class Shell {
 
   readonly menu = [
     { ruta: '/productos', etiqueta: 'Productos'},
-    { ruta: '/_', etiqueta: '_'}
+    { ruta: '/mascotas', etiqueta: 'Mascotas'},
+    { ruta: '/games', etiqueta: 'Games'}
   ];
 
   toggleModoOscuro(): void {

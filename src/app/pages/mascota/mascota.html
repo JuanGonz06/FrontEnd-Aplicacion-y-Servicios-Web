@@ -1,0 +1,112 @@
+<div class="container">
+  <h2>Gestión de Mascotas</h2>
+
+  @if (sinConexion()) {
+    <div class="alerta error">⚠️ {{ mensaje() }}</div>
+  } @else if (mensaje()) {
+    <div class="alerta warning">{{ mensaje() }}</div>
+  }
+
+  <div class="acciones-superiores" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <div class="card filtro-card" style="margin-bottom: 0; flex: 1; margin-right: 15px;">
+      <h3>Consultar por ID</h3>
+      <form class="form-group-inline" (ngSubmit)="buscarPorId()">
+        <input [(ngModel)]="idFiltro" name="idFiltro" placeholder="Ingrese ID" class="form-control" />
+        <button type="submit" class="btn-primario">Buscar</button>
+        <button type="button" class="btn-secundario" (click)="limpiarFiltro()">Limpiar</button>
+      </form>
+    </div>
+
+    <div>
+      <button class="btn-primario" (click)="abrirCrear()" style="padding: 12px 20px; font-size: 16px;">
+        ➕ Nueva Mascota
+      </button>
+    </div>
+  </div>
+
+  @if (popupAbierto()) {
+    <div class="modal-overlay abierto" (click)="cerrarPopup()">
+      <div class="modal-content card form-card" (click)="$event.stopPropagation()">
+        <h3>{{ modo() === 'crear' ? 'Crear Nueva Mascota' : 'Editar Mascota' }}</h3>
+        <form (ngSubmit)="guardar()">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Nombre:</label>
+              <input [(ngModel)]="form.nombre" name="nombre" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>Especie:</label>
+              <input [(ngModel)]="form.especie" name="especie" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>Raza (opcional):</label>
+              <input [(ngModel)]="form.raza" name="raza" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>Edad (0 a 40):</label>
+              <input type="number" [(ngModel)]="form.edad" name="edad" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>Peso en kg (opcional):</label>
+              <input type="number" step="any" [(ngModel)]="form.peso" name="peso" class="form-control" />
+            </div>
+            <div class="form-group checkbox-group">
+              <label>
+                <input type="checkbox" [(ngModel)]="form.vacunado" name="vacunado" />
+                Vacunado
+              </label>
+            </div>
+          </div>
+
+          @if (errorPopup()) {
+            <div class="alerta error">{{ errorPopup() }}</div>
+          }
+
+          <div class="form-actions" style="margin-top: 20px;">
+            <button type="submit" class="btn-primario">{{ modo() === 'crear' ? 'Crear' : 'Actualizar' }}</button>
+            <button type="button" class="btn-secundario" (click)="cerrarPopup()">Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  }
+
+  <div class="tabla-wrap">
+    <h3>Lista de Mascotas</h3>
+    <table class="tabla">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Especie</th>
+          <th>Raza</th>
+          <th>Edad</th>
+          <th>Peso</th>
+          <th>Vacunado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (fila of filas(); track fila.id) {
+          <tr>
+            <td>{{ fila.id }}</td>
+            <td>{{ fila.nombre }}</td>
+            <td>{{ fila.especie }}</td>
+            <td>{{ fila.raza }}</td>
+            <td>{{ fila.edad }}</td>
+            <td>{{ fila.peso }}</td>
+            <td>{{ fila.vacunado ? 'Sí' : 'No' }}</td>
+            <td>
+              <button class="btn-editar" (click)="abrirEditar(fila)">Editar</button>
+              <button class="btn-eliminar" (click)="eliminar(fila)">Eliminar</button>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="8" class="text-center">No hay mascotas para mostrar.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
