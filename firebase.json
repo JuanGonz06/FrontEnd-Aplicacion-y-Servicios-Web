@@ -1,10 +1,6 @@
 {
   "hosting": {
-<<<<<<< HEAD
-    "public": "dist\\FrontEnd-Aplicacion-y-Servicios-Web\\browser",
-=======
     "public": "dist/FrontEnd-Aplicacion-y-Servicios-Web/browser",
->>>>>>> main
     "ignore": [
       "firebase.json",
       "**/.*",
